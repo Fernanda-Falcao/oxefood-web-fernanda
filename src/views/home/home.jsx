@@ -1,7 +1,7 @@
 import React from "react";
 import { Container, Grid, Image } from 'semantic-ui-react';
 
-export default function FromEntregador() {
+export default function Home() {
 
     return (
         <div>
