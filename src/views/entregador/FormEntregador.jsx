@@ -1,25 +1,24 @@
 import axios from "axios";
-import InputMask from 'comigo-tech-react-input-mask';
 import React, { useState } from "react";
-import { Button, Container, Divider, Form, Icon, Radio, Select } from 'semantic-ui-react';
+import { Button, Container, Divider, Form, Icon } from 'semantic-ui-react';
 import MenuSistema from '../../MenuSistema';
-
+import { Link } from "react-router-dom";
 
 const ufList = [
-    { 
-        key: 'o', 
+    {
+        key: 'o',
         text: 'Alagoas',
-        value: 'Al', 
+        value: 'Al',
     },
 
-    { 
-        key: 'f', 
+    {
+        key: 'f',
         text: 'Paraíba',
-        value: 'PB'    
+        value: 'PB'
     },
 
-    { 
-        key: 'm', 
+    {
+        key: 'm',
         text: 'Pernambuco',
         value: 'PE'
     },
@@ -44,46 +43,46 @@ export default function FormEntregador() {
     const [enderecoComplemento, setEnderecoComplemento] = useState(true);
     const [ativo, setAtivo] = useState(true);
 
-        function salvar() {
+    function salvar() {
 
-            let entregadorRequest = {
-                nome: nome,
-                cpf: cpf,
-                rg: rg,
-                dtNascimento: dtNascimento,
-                fonecelular: fonecelular,
-                fonefixo: fonefixo,
-                qtdEntregasRealizadas:parseInt(qtdentregasrealizadas),
-                valorporFrete: parseFloat(valorporFrete),
-                enderecoRua:enderecoRua,
-                enderecoNumero:enderecoNumero,
-                enderecoBairro:enderecoBairro,
-                enderecoCep:enderecoCep,
-                enderecoCidade:enderecoCidade,
-                enderecoEstado:enderecoEstado,
-                enderecoComplemento:enderecoComplemento,
-                ativo:ativo,
-               
-                
-            }
-    
-            axios.post("http://localhost:8080/api/entregador", entregadorRequest)
-                .then((response) => {
-                    console.log('Entregador cadastrado com sucesso.')
-                })
-                .catch((error) => {
-                    console.log('Erro ao incluir  um entregador.')
-                })
-        }  
-    
-   
+        let entregadorRequest = {
+            nome: nome,
+            cpf: cpf,
+            rg: rg,
+            dtNascimento: dtNascimento,
+            fonecelular: fonecelular,
+            fonefixo: fonefixo,
+            qtdEntregasRealizadas: parseInt(qtdentregasrealizadas),
+            valorporFrete: parseFloat(valorporFrete),
+            enderecoRua: enderecoRua,
+            enderecoNumero: enderecoNumero,
+            enderecoBairro: enderecoBairro,
+            enderecoCep: enderecoCep,
+            enderecoCidade: enderecoCidade,
+            enderecoEstado: enderecoEstado,
+            enderecoComplemento: enderecoComplemento,
+            ativo: ativo,
+
+
+        }
+
+        axios.post("http://localhost:8080/api/entregador", entregadorRequest)
+            .then((response) => {
+                console.log('Entregador cadastrado com sucesso.')
+            })
+            .catch((error) => {
+                console.log('Erro ao incluir  um entregador.')
+            })
+    }
+
+
 
     return (
         <div>
 
             <MenuSistema tela={'entregador'} />
             <div style={{ marginTop: '3%' }}>
-                
+
                 <Container textAlign='justified'>
                     <h2>
                         <span style={{ color: 'darkgray' }}>
@@ -111,56 +110,56 @@ export default function FormEntregador() {
                                 />
 
                                 <Form.Input
-                                     fluid
-                                     label= 'CPF'
-                                     required
-                                     width={4}
-                                     value={cpf}
-                                     onChange={e => setCPF(e.target.value)}
+                                    fluid
+                                    label='CPF'
+                                    required
+                                    width={4}
+                                    value={cpf}
+                                    onChange={e => setCPF(e.target.value)}
                                 />
 
-                                <Form.Input 
+                                <Form.Input
                                     fluid
-                                    label= 'RG'
-                                    required 
+                                    label='RG'
+                                    required
                                     width={6}
                                     value={rg}
                                     onChange={e => setRG(e.target.value)}
                                 />
 
-                           </Form.Group>
-                            
+                            </Form.Group>
+
 
                             {/* Data Nasc / Celular / Fixo */}
                             <Form.Group >
                                 <Form.Input
                                     fluid
-                                    label= 'dtNascimento'
-                                    required 
+                                    label='dtNascimento'
+                                    required
                                     width={6}
                                     value={dtNascimento}
                                     onChange={e => setDtNascimento(e.target.value)}
                                 />
-                                
+
 
                                 <Form.Input
                                     fluid
                                     label='fonecelular'
-                                     width={3}
-                                     value={fonecelular}
+                                    width={3}
+                                    value={fonecelular}
                                     onChange={(e) => setFoneCelular(e.target.value)}
                                 />
                             </Form.Group>
 
-                                <Form.Input
+                            <Form.Input
                                 fluid
                                 label='fonefixo'
                                 width={3}
                                 value={fonefixo}
                                 onChange={(e) => setFoneFixo(e.target.value)}
                             />
-                              
-            
+
+
                             {/* QTD Entregas / Valor Frete */}
                             <Form.Group >
                                 <Form.Input
@@ -177,7 +176,7 @@ export default function FormEntregador() {
                                     width={3}
                                     value={valorporFrete}
                                     onChange={(e) => setValorPorFrete(e.target.value)}
-                                    
+
                                 />
                             </Form.Group>
 
@@ -225,54 +224,54 @@ export default function FormEntregador() {
                             </Form.Group>
 
                             {/* UF / Complemento */}
-                            
-                                <Form.Select
-                                        fluid
-                                        label='UF'
-                                        options={ufList}
-                                        placeholder='Selecione'
-                                        value={enderecoEstado}
-                                        onChange={(e, { value }) => {setEnderecoEstado(value)}}
-                                    />
-                               
 
-                                <Form.Input
-                                    fluid
-                                    label='Complemento'
-                                    value={enderecoComplemento}
-                                    onChange={(e) =>setEnderecoComplemento(e.target.value)}
-                                />
-                            
+                            <Form.Select
+                                fluid
+                                label='UF'
+                                options={ufList}
+                                placeholder='Selecione'
+                                value={enderecoEstado}
+                                onChange={(e, { value }) => { setEnderecoEstado(value) }}
+                            />
+
+
+                            <Form.Input
+                                fluid
+                                label='Complemento'
+                                value={enderecoComplemento}
+                                onChange={(e) => setEnderecoComplemento(e.target.value)}
+                            />
+
 
                             {/* Ativo: Sim / Não */}
                             <Form.Group inline>
                                 <label>Ativo:</label>
                                 <Form.Radio
-                                        label='Sim'
-                                        checked={ativo === true}
-                                        onChange={() => setAtivo(true)}
-                               />
+                                    label='Sim'
+                                    checked={ativo === true}
+                                    onChange={() => setAtivo(true)}
+                                />
                                 <Form.Radio
-                                        label='Não'
-                                        checked={ativo === false}
-                                        onChange={() => setAtivo(false)}
-                                    />
-                                
+                                    label='Não'
+                                    checked={ativo === false}
+                                    onChange={() => setAtivo(false)}
+                                />
+
                             </Form.Group>
 
                             {/* Botões */}
                             <div style={{ marginTop: '4%' }}>
-                                <Button
-                                    type="button"
-                                    inverted
-                                    circular
-                                    icon
-                                    labelPosition='left'
-                                    color='orange'
-                                >
-                                    <Icon name='reply' />
-                                    Voltar
-                                </Button>
+                                <Link to={'/list-entregador'}>
+                                    <Button
+                                        inverted
+                                        circular
+                                        icon
+                                        labelPosition='left'
+                                        color='orange'
+                                    >
+                                        <Icon name='reply' /> Voltar
+                                    </Button>
+                                </Link>
 
                                 <Button
                                     inverted
