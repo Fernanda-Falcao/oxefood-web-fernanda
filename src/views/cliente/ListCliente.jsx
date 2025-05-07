@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import { Button, Container, Divider, Icon, Table } from 'semantic-ui-react';
 import MenuSistema from '../../MenuSistema';
 
+
 export default function ListCliente () {
 
    const [lista, setLista] = useState([]);

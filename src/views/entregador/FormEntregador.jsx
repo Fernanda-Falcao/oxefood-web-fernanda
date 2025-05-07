@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import { Button, Container, Divider, Form, Icon } from 'semantic-ui-react';
 import MenuSistema from '../../MenuSistema';
 import { Link } from "react-router-dom";
+import InputMask from "comigo-tech-react-input-mask/lib/react-input-mask.development";
 
 const ufList = [
     {
@@ -29,9 +30,9 @@ export default function FormEntregador() {
     const [nome, setNome] = useState();
     const [cpf, setCPF] = useState();
     const [rg, setRG] = useState();
-    const [dtNascimento, setDtNascimento] = useState();
-    const [fonecelular, setFoneCelular] = useState();
-    const [fonefixo, setFoneFixo] = useState();
+    const [dataNascimento, setDataNascimento] = useState();
+    const [foneCelular, setFoneCelular] = useState();
+    const [foneFixo, setFoneFixo] = useState();
     const [qtdentregasrealizadas, setQtdEntregasRealizadas] = useState();
     const [valorporFrete, setValorPorFrete] = useState();
     const [enderecoRua, setEnderecoRua] = useState();
@@ -49,9 +50,9 @@ export default function FormEntregador() {
             nome: nome,
             cpf: cpf,
             rg: rg,
-            dtNascimento: dtNascimento,
-            fonecelular: fonecelular,
-            fonefixo: fonefixo,
+            dataNascimento: dataNascimento,
+            foneCelular: foneCelular,
+            foneFixo: foneFixo,
             qtdEntregasRealizadas: parseInt(qtdentregasrealizadas),
             valorporFrete: parseFloat(valorporFrete),
             enderecoRua: enderecoRua,
@@ -101,32 +102,37 @@ export default function FormEntregador() {
                             <Form.Group>
 
                                 <Form.Input
+                                    required
                                     fluid
                                     label='Nome'
-                                    width={8}
-                                    required
+                                    maxLength="100"
                                     value={nome}
                                     onChange={e => setNome(e.target.value)}
                                 />
 
                                 <Form.Input
-                                    fluid
-                                    label='CPF'
                                     required
-                                    width={4}
-                                    value={cpf}
-                                    onChange={e => setCPF(e.target.value)}
+                                    fluid
+                                    label='CPF'>
+                                    <InputMask    
+                                       required
+                                       mask="9999.999.999"
+                                       value={cpf}
+                                       onChange={e => setCPF(e.target.value)}
                                 />
-
+                               </Form.Input>
+                               
                                 <Form.Input
-                                    fluid
-                                    label='RG'
                                     required
-                                    width={6}
+                                    fluid
+                                    label='RG'>
+                                   <InputMask
+                                    required
+                                    mask="9999.999-99"
                                     value={rg}
                                     onChange={e => setRG(e.target.value)}
                                 />
-
+                               </Form.Input>
                             </Form.Group>
 
 
@@ -134,31 +140,37 @@ export default function FormEntregador() {
                             <Form.Group >
                                 <Form.Input
                                     fluid
-                                    label='dtNascimento'
-                                    required
-                                    width={6}
-                                    value={dtNascimento}
-                                    onChange={e => setDtNascimento(e.target.value)}
+                                    label='Data Nascimento'
+                                    width={6}>
+                                    <InputMask
+                                      mask="99/99/9999"
+                                      maskChar={null}
+                                      placeholder="Ex:20/03/1981"
+                                    value={dataNascimento}
+                                    onChange={e => setDataNascimento(e.target.value)}
                                 />
 
+                                </Form.Input>
 
                                 <Form.Input
                                     fluid
-                                    label='fonecelular'
+                                    label='Fone Celular'
                                     width={3}
-                                    value={fonecelular}
+                                    value={foneCelular}
                                     onChange={(e) => setFoneCelular(e.target.value)}
                                 />
                             </Form.Group>
 
                             <Form.Input
                                 fluid
-                                label='fonefixo'
-                                width={3}
-                                value={fonefixo}
-                                onChange={(e) => setFoneFixo(e.target.value)}
-                            />
-
+                                label='Fone Fixo'
+                                width={6}>
+                                <InputMask
+                                  mask="(99) 9999.9999"
+                                  value={foneFixo}
+                                  onChange={(e) => setFoneFixo(e.target.value)}
+                              />
+                            </Form.Input>
 
                             {/* QTD Entregas / Valor Frete */}
                             <Form.Group >
