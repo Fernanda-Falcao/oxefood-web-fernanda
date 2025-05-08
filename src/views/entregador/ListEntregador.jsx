@@ -1,7 +1,7 @@
 import axios from 'axios';
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { Button, Container, Divider, Icon, Table, Modal, Header } from 'semantic-ui-react';
+import { Button, Container, Divider, Header, Icon, Modal, Table } from 'semantic-ui-react';
 import MenuSistema from '../../MenuSistema';
 
 export default function ListEntregador() {
@@ -95,19 +95,19 @@ export default function ListEntregador() {
                                                 color='red'
                                                 title='Clique aqui para remover esta entrega'
                                                 icon
-                                                
+
                                             >
                                                 <Icon name='trash' />
                                             </Button>
                                             <Button
                                                 inverted
                                                 circular
-                                                color= 'blue'
-                                                title = 'Sobre o entregador'
+                                                color='blue'
+                                                title='Sobre o entregador'
                                                 icon
                                                 onClick={() => abrirModal(entregador)}
                                             >
-                                                <Icon name= 'info'/>
+                                                <Icon name='info' />
                                             </Button>
                                         </Table.Cell>
                                     </Table.Row>
@@ -123,11 +123,22 @@ export default function ListEntregador() {
                 <Modal.Content>
                     <Modal.Description>
                         <Header>Detalhes do Entregador</Header>
+                        <p><strong>nome:</strong> {entregadorSelecionado?.nome}</p>
                         <p><strong>CPF:</strong> {entregadorSelecionado?.cpf}</p>
                         <p><strong>RG:</strong> {entregadorSelecionado?.rg}</p>
                         <p><strong>Data de Nascimento:</strong> {formatarData(entregadorSelecionado?.dataNascimento)}</p>
                         <p><strong>Fone Celular:</strong> {entregadorSelecionado?.foneCelular}</p>
                         <p><strong>Fone Fixo:</strong> {entregadorSelecionado?.fonefixo}</p>
+                        <p><strong>qtdEntregasRealizadas:</strong>{entregadorSelecionado?.qtdEntregasRealizadas}</p>
+                        <p><strong>valorFrete:</strong>{entregadorSelecionado?.valorFrete}</p>
+                        <p><strong>enderecoRua:</strong>{entregadorSelecionado?.enderecoRua}</p>
+                        <p><strong>enderecoComplemento:</strong>{entregadorSelecionado?.enderecoComplemento}</p>
+                        <p><strong>enderecoNumero:</strong>{entregadorSelecionado?.enderecoNumero}</p>
+                        <p><strong>enderecoBairro:</strong>{entregadorSelecionado?.enderecoBairro}</p>
+                        <p><strong>enderecoCidade:</strong>{entregadorSelecionado?.enderecoCidade}</p>
+                        <p><strong>enderecoCep:</strong>{entregadorSelecionado?.enderecoCep}</p>
+                        <p><strong>enderecoUf:</strong>{entregadorSelecionado?.enderecoUf}</p>
+                        <p><strong>ativo:</strong>{entregadorSelecionado?.ativo}</p>
                     </Modal.Description>
                 </Modal.Content>
                 <Modal.Actions>
