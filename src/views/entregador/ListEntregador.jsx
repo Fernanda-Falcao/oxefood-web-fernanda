@@ -9,22 +9,49 @@ export default function ListEntregador() {
     const [lista, setLista] = useState([]);
     const [open, setOpen] = useState(false);
     const [entregadorSelecionado, setEntregadorSelecionado] = useState(null);
+    const [openModal, setOpenModal] = useState(false);
+    const [idRemover, setIdRemover] = useState();
 
-    useEffect(() => {
-        carregarLista();
-    }, []);
+    function confirmaRemover(id) {
+        setOpenModal(true)
+        setIdRemover(id)
+    }
+
+        useEffect(() => {
+          carregarLista();
+    }, [])
 
     function carregarLista() {
         axios.get("http://localhost:8080/api/entregador")
             .then((response) => {
-                setLista(response.data);
-            });
+                setLista(response.data)
+            })
     }
 
     function formatarData(dataParam) {
-        if (!dataParam) return '';
+        if (dataParam === null || dataParam === '' || dataParam === undefined) {
+            return ''
+        }
+    
         let arrayData = dataParam.split('-');
-        return `${arrayData[2]}/${arrayData[1]}/${arrayData[0]}`;
+        return arrayData[2] + '/' + arrayData[1] + '/' + arrayData[0];
+    }
+    async function remover() {
+    
+        await axios.delete('http://localhost:8080/api/entregador/' + idRemover)
+        .then((response) => {
+    
+            console.log('Entrega removida com sucesso.')
+    
+            axios.get("http://localhost:8080/api/entregador")
+            .then((response) => {
+                setLista(response.data)
+            })
+        })
+        .catch((error) => {
+            console.log('Erro ao remover um entrega.')
+        })
+        setOpenModal(false)
     }
 
     function abrirModal(entregador) {
@@ -60,12 +87,12 @@ export default function ListEntregador() {
                         <Table color='orange' sortable celled>
                             <Table.Header>
                                 <Table.Row>
-                                    <Table.HeaderCell>nome</Table.HeaderCell>
-                                    <Table.HeaderCell>cpf</Table.HeaderCell>
-                                    <Table.HeaderCell>rg</Table.HeaderCell>
-                                    <Table.HeaderCell>dtNascimento</Table.HeaderCell>
-                                    <Table.HeaderCell>foneCelular</Table.HeaderCell>
-                                    <Table.HeaderCell>fonefixo</Table.HeaderCell>
+                                    <Table.HeaderCell>Nome</Table.HeaderCell>
+                                    <Table.HeaderCell>CPF</Table.HeaderCell>
+                                    <Table.HeaderCell>RG</Table.HeaderCell>
+                                    <Table.HeaderCell>Data de Nascimento</Table.HeaderCell>
+                                    <Table.HeaderCell>Fone Celular</Table.HeaderCell>
+                                    <Table.HeaderCell>Fone Fixo</Table.HeaderCell>
                                     <Table.HeaderCell textAlign='center'>Ações</Table.HeaderCell>
                                 </Table.Row>
                             </Table.Header>
@@ -78,7 +105,7 @@ export default function ListEntregador() {
                                         <Table.Cell>{entregador.rg}</Table.Cell>
                                         <Table.Cell>{formatarData(entregador.dataNascimento)}</Table.Cell>
                                         <Table.Cell>{entregador.foneCelular}</Table.Cell>
-                                        <Table.Cell>{entregador.fonefixo}</Table.Cell>
+                                        <Table.Cell>{entregador.foneFixo}</Table.Cell>
                                         <Table.Cell textAlign='center'>
                                             <Button
                                                 inverted
@@ -87,17 +114,17 @@ export default function ListEntregador() {
                                                 title='Clique aqui para editar os dados desta entrega'
                                                 icon
                                             >
-                                                <Icon name='edit' />
+                                                <Link to="/form-entregador" state={{id: entregador.id}} style={{color: 'green'}}> <Icon name='edit' /> </Link> 
                                             </Button> &nbsp;
                                             <Button
                                                 inverted
                                                 circular
                                                 color='red'
                                                 title='Clique aqui para remover esta entrega'
-                                                icon
-
-                                            >
-                                                <Icon name='trash' />
+                                                icon>
+                                                   <Icon 
+                                                   onClick={e => confirmaRemover(entregador.id)}
+                                                   name='trash' />
                                             </Button>
                                             <Button
                                                 inverted
@@ -108,6 +135,7 @@ export default function ListEntregador() {
                                                 onClick={() => abrirModal(entregador)}
                                             >
                                                 <Icon name='info' />
+                                            
                                             </Button>
                                         </Table.Cell>
                                     </Table.Row>
@@ -117,6 +145,26 @@ export default function ListEntregador() {
                     </div>
                 </Container>
             </div>
+            
+            <Modal
+                           basic
+                           onClose={() => setOpenModal(false)}
+                           onOpen={() => setOpenModal(true)}
+                           open={openModal}
+                     >
+                           <Header icon>
+                               <Icon name='trash' />
+                               <div style={{marginTop: '5%'}}> Tem certeza que deseja remover esse registro? </div>
+                           </Header>
+                           <Modal.Actions>
+                               <Button basic color='red' inverted onClick={() => setOpenModal(false)}>
+                                   <Icon name='remove' /> Não
+                               </Button>
+                               <Button color='green' inverted onClick={() => remover()}>
+                                   <Icon name='checkmark' /> Sim
+                               </Button>
+                           </Modal.Actions>
+                     </Modal>
 
             <Modal open={open} onClose={fecharModal}>
                 <Modal.Header>Entregador: {entregadorSelecionado?.nome}</Modal.Header>
@@ -128,7 +176,7 @@ export default function ListEntregador() {
                         <p><strong>RG:</strong> {entregadorSelecionado?.rg}</p>
                         <p><strong>Data de Nascimento:</strong> {formatarData(entregadorSelecionado?.dataNascimento)}</p>
                         <p><strong>Fone Celular:</strong> {entregadorSelecionado?.foneCelular}</p>
-                        <p><strong>Fone Fixo:</strong> {entregadorSelecionado?.fonefixo}</p>
+                        <p><strong>Fone Fixo:</strong> {entregadorSelecionado?.foneFixo}</p>
                         <p><strong>qtdEntregasRealizadas:</strong>{entregadorSelecionado?.qtdEntregasRealizadas}</p>
                         <p><strong>valorFrete:</strong>{entregadorSelecionado?.valorFrete}</p>
                         <p><strong>enderecoRua:</strong>{entregadorSelecionado?.enderecoRua}</p>
@@ -147,7 +195,7 @@ export default function ListEntregador() {
             </Modal>
         </div>
     );
-}
+  }
 
 
 

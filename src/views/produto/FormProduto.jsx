@@ -6,6 +6,7 @@ import { Button, Container, Divider, Form, Icon } from 'semantic-ui-react';
 import MenuSistema from '../../MenuSistema';
 
 export default function FormProduto() {
+
     const [titulo, setTitulo] = useState('');
     const [codigo, setCodigo] = useState('');
     const [descricao, setDescricao] = useState('');
@@ -45,11 +46,11 @@ export default function FormProduto() {
 
         }
         if (idProduto != null) { //Alteração:
-            axios.put("http://localhost:8080/api/cliente/" + idProduto, produtoRequest)
+            axios.put("http://localhost:8080/api/produto/" + idProduto, produtoRequest)
                 .then((response) => { console.log('Produto alterado com sucesso.') })
                 .catch((error) => { console.log('Erro ao alter um produto.') })
         } else { //Cadastro:
-            axios.post("http://localhost:8080/api/cliente", produtoRequest)
+            axios.post("http://localhost:8080/api/produto", produtoRequest)
                 .then((response) => { console.log('Produto cadastrado com sucesso.') })
                 .catch((error) => { console.log('Erro ao incluir o produto.') })
         }
@@ -63,24 +64,22 @@ export default function FormProduto() {
                 console.log('Erro ao incluir  um produto.')
             })
     }
+     
 
     return (
         <div>
             <MenuSistema tela={'produto'} />
             <div style={{ marginTop: '3%' }}>
+
                 <Container textAlign='justified'>
                     {idProduto === undefined &&
                         <h2> <span style={{ color: 'darkgray' }}> Produto &nbsp;<Icon name='angle double right' size="small" /> </span> Cadastro</h2>
                     }
-                    {idProduto != undefined &&
+                    {idProduto !== undefined &&
                         <h2> <span style={{ color: 'darkgray' }}> Produto &nbsp;<Icon name='angle double right' size="small" /> </span> Alteração</h2>
                     }
 
-                    <h2>
-                        <span style={{ color: 'darkgray' }}>
-                            Produto &nbsp;<Icon name='angle double right' size="small" />
-                        </span> Cadastro
-                    </h2>
+                   
 
                     <Divider />
 
