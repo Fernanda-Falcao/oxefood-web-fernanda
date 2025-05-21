@@ -15,14 +15,14 @@ export default function FormCupomDesconto() {
     const [valorMinimoPedidoPermitido, setValorMinimoPedidoPermitido] = useState();
     const [quantidadeMaximaUso, setQuantidadeMaximaUso] = useState();
     const [inicioVigencia, setInicioVigencia] = useState();
-    const [fimVigencia, setfimVigencia] = useState();
+    const [fimVigencia, setFimVigencia] = useState();
 
 
     useEffect(() => {
         if (state != null && state.id != null) {
-            axios.get("http://localhost:8080/api/cupomDesconto/" + state.id)
+            axios.get("http://localhost:8080/api/cupomdesconto/" + state.id)
                 .then((response) => {
-                    setIdcupomDesconto / (response.data.id)
+                    setIdCupomDesconto(response.data.id)
                     setCodigoDesconto(response.data.codigoDesconto)
                     setPercentualDesconto(response.data.percentualDesconto)
                     setValorDesconto(formatarData(response.data.valorDesconto))
@@ -48,21 +48,21 @@ export default function FormCupomDesconto() {
         }
 
         if (idCupomDesconto != null) { //Alteração:
-            axios.put("http://localhost:8080/api/cupomDesconto/" + idCupomDesconto, cupomDescontoRequest)
+            axios.put("http://localhost:8080/api/cupomdesconto/" + idCupomDesconto, cupomDescontoRequest)
                 .then((response) => { console.log('Cupom Desconto alterado com sucesso.') })
                 .catch((error) => { console.log('Erro ao alter um cupom Desconto.') })
         } else { //Cadastro:
-            axios.post("http://localhost:8080/api/cupomDesconto", cupomDescontoRequest)
+            axios.post("http://localhost:8080/api/cupomdesconto", cupomDescontoRequest)
                 .then((response) => { console.log('Cupom Desconto cadastrado com sucesso.') })
                 .catch((error) => { console.log('Erro ao incluir o cupom Desconto.') })
         }
 
-        axios.post("http://localhost:8080/api/cupomDesconto", cupomDescontoRequest)
+        axios.post("http://localhost:8080/api/cupomdesconto", cupomDescontoRequest)
             .then((response) => {
                 console.log('Cupom Desconto cadastrado com sucesso.')
             })
             .catch((error) => {
-                console.log('Erro ao incluir o um cupo mDesconto.')
+                console.log('Erro ao incluir o um cupom Desconto.')
             })
     }
     function formatarData(dataParam) {
@@ -79,15 +79,15 @@ export default function FormCupomDesconto() {
 
         <div>
 
-            <MenuSistema tela={'cupomDesconto'} />
+            <MenuSistema tela={'CupomDesconto'} />
             <div style={{ marginTop: '3%' }}>
 
                 <Container textAlign='justified' >
 
-                    {idcupomDesconto === undefined &&
+                    {idCupomDesconto === undefined &&
                         <h2> <span style={{ color: 'darkgray' }}> CupomDesconto &nbsp;<Icon name='angle double right' size="small" /> </span> Cadastro</h2>
                     }
-                    {idCupomDesconto != undefined &&
+                    {idCupomDesconto !== undefined &&
                         <h2> <span style={{ color: 'darkgray' }}> idCupomDesconto != undefined &&
                             &nbsp;<Icon name='angle double right' size="small" /> </span> Alteração</h2>
 

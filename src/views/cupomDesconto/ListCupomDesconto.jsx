@@ -22,7 +22,7 @@ export default function ListCupomDesconto () {
 
    function carregarLista() {
 
-       axios.get("http://localhost:8080/api/cupomDesconto")
+       axios.get("http://localhost:8080/api/cupomdesconto")
        .then((response) => {
            setLista(response.data)
        })
@@ -38,18 +38,18 @@ export default function ListCupomDesconto () {
 }
 async function remover() {
 
-    await axios.delete('http://localhost:8080/api/cupomDesconto/' + idRemover)
+    await axios.delete('http://localhost:8080/api/cupomdesconto/' + idRemover)
     .then((response) => {
 
         console.log('Cupom Desconto removido com sucesso.')
 
-        axios.get("http://localhost:8080/api/cupomDesconto")
+        axios.get("http://localhost:8080/api/cupomdesconto")
         .then((response) => {
             setLista(response.data)
         })
     })
     .catch((error) => {
-        console.log('Erro ao remover um cupomDesconto.')
+        console.log('Erro ao remover um cupom desconto.')
     })
     setOpenModal(false)
 }
@@ -58,12 +58,12 @@ async function remover() {
 
 return(
     <div>
-        <MenuSistema tela={'cupomDesconto'} />
+        <MenuSistema tela={'cupomdesconto'} />
         <div style={{marginTop: '3%'}}>
 
             <Container textAlign='justified' >
 
-                <h2> CupomDesconto </h2>
+                <h2> Cupom Desconto </h2>
                 <Divider />
 
                 <div style={{marginTop: '4%'}}>
@@ -74,7 +74,7 @@ return(
                         icon='clipboard outline'
                         floated='right'
                         as={Link}
-                        to='/form-cupomDesconto'
+                        to='/form-cupomdesconto'
                     />
 <br/><br/><br/>
                   
@@ -113,7 +113,7 @@ return(
                                           color='green'
                                           title='Clique aqui para editar os dados deste cupomDesconto'
                                           icon>
-                                            <Link to="/form-cupomDesconto" state={{id: cupomDesconto.id}} style={{color: 'green'}}> <Icon name='edit' /> </Link>
+                                            <Link to="/form-cupomdesconto" state={{id: cupomDesconto.id}} style={{color: 'green'}}> <Icon name='edit' /> </Link>
 
                                                
                                       </Button> &nbsp;

@@ -42,9 +42,9 @@ export default function MenuSistema(props) {
                 />
                 <Menu.Item
                     content='CupomDesconto'
-                    active={props.tela === 'CupomDesconto'}
+                    active={props.tela === 'cupom desconto'}
                     as={Link}
-                    to='/list-cupomDesconto'
+                    to='/list-cupomdesconto'
                 />
 
 

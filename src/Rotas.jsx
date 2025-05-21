@@ -25,7 +25,7 @@ function Rotas() {
                 <Route path="form-produto" element={<FormProduto />} />
                 <Route path="form-entregador" element={<FormEntregador />} />
                 <Route path="form-venda" element={<FormVenda />} />
-                <Route path="form-cupomDesconto" element={<FormCupomDesconto />} />
+                <Route path="form-cupomdesconto" element={<FormCupomDesconto />} />
 
             </Routes>
         </>
