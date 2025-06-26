@@ -1,18 +1,18 @@
 import axios from "axios";
-import { notifyError, notifySuccess } from "../../util/Util";
-import React, { useEffect, useState } from "react";
-import { Link, useLocation } from "react-router-dom";
 import InputMask from "comigo-tech-react-input-mask";
+import { useEffect, useState } from "react";
+import { Link, useLocation } from "react-router-dom";
 import {
-  Button,
-  Container,
-  Divider,
-  Form,
-  Icon,
-  Dropdown,
-  Radio,
+    Button,
+    Container,
+    Divider,
+    Dropdown,
+    Form,
+    Icon,
+    Radio,
 } from "semantic-ui-react";
 import MenuSistema from "../../MenuSistema";
+import { notifyError, notifySuccess } from "../util/Util";
 
 export default function FormVenda() {
   const { state } = useLocation();

@@ -1,10 +1,10 @@
 import axios from "axios";
-import { notifyError, notifySuccess } from "../../util/Util";
 import InputMask from "comigo-tech-react-input-mask";
 import { useEffect, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { Button, Container, Divider, Form, Icon } from "semantic-ui-react";
 import MenuSistema from "../../MenuSistema";
+import { notifyError, notifySuccess } from "../util/Util";
 
 export default function FormCliente() {
   const { state } = useLocation();

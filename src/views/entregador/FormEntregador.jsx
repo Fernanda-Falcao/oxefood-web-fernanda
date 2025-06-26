@@ -1,10 +1,10 @@
 import axios from "axios";
-import { notifyError, notifySuccess } from "../../util/Util";
-import React, { useEffect, useState } from "react";
+import InputMask from "comigo-tech-react-input-mask/lib/react-input-mask.development";
+import { useEffect, useState } from "react";
+import { Link, useLocation } from "react-router-dom";
 import { Button, Container, Divider, Form, Icon } from "semantic-ui-react";
 import MenuSistema from "../../MenuSistema";
-import { Link, useLocation } from "react-router-dom";
-import InputMask from "comigo-tech-react-input-mask/lib/react-input-mask.development";
+import { notifyError, notifySuccess } from "../util/Util";
 
 const ufList = [
   {
