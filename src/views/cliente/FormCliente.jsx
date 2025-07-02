@@ -67,7 +67,7 @@ export default function FormCliente() {
         notifySuccess("Cliente cadastrado com sucesso.");
       })
       .catch((error) => {
-        if (error.response.data.errors != undefined) {
+        if (error.response.data.errors != null) {
           for (let i = 0; i < error.response.data.errors.length; i++) {
             notifyError(error.response.data.errors[i].defaultMessage);
           }
@@ -140,9 +140,12 @@ export default function FormCliente() {
               <Form.Group>
                 <Form.Input fluid label="Fone Celular" width={6}>
                   <InputMask
-                    mask="(99) 9999.9999"
+                    mask="(99) 99999.9999"
                     value={foneCelular}
-                    onChange={(e) => setFoneCelular(e.target.value)}
+                    onChange={(e) => {
+                      const raw = e.target.value.replace(/\D/g, ""); // Remove tudo que não for número
+                      setFoneCelular(raw); // Ex: 81985838887
+                    }}
                   />
                 </Form.Input>
 
